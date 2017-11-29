@@ -46,7 +46,9 @@ module memorySystem (
    input logic [15:0]   address,
    input wr_cond_code_t we_L,
    input rd_cond_code_t re_L,
-   input logic          clock);
+	input logic [15:0] fromSwitch,
+   input logic          clock,
+	output logic [15:0] toLED);
 
 `ifdef synthesis
    logic pmem_en, dmem_en, smem_en;
@@ -72,11 +74,18 @@ module memorySystem (
                              .re_L(re_L),
                              .data(data),
                              .address(address[7:0]));
+	//Memory mapped IO
+	logic [15:0] tempData;
+	tridrive 				triT(.data(data), .bus(tempData), .en_L(~io2_en));
+	register 				ioSW(.clock(clock), .load_L(~io2_en),  .in(fromSwitch), .out(tempData));
+	register 				ioLED(.clock(clock), .load_L(~io1_en),  .in(data), .out(toLED));
 
    // Address decoders to enable individual memory modules
    assign pmem_en = (address[15:8] == 8'h00);
    assign dmem_en = (address[15:8] == 8'h01);
    assign smem_en = (address[15:8] == 8'hFF);
+	assign io1_en = (address == 16'h1001 && ~re_L);
+	assign io2_en = (address == 16'h1000 && ~we_L);
 
 `else
   // full sized memory for simulation, initialized with memory.hex

@@ -101,6 +101,12 @@ module alu (
          F_A_ASHR : begin
             {C, out} = {inA[0], inA[15], inA[15:1]}; // ashr A
          end
+			F_A_POSC : begin
+				out = 16'h8000;
+			end
+			F_A_NEGC : begin
+				out = 16'h7FFF;
+			end
          default: out = inA;
       endcase
 

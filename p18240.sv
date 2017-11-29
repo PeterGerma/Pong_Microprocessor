@@ -112,7 +112,9 @@ module p18240_top(
                    .address(memAddr),
                    .re_L(cPts.re_L),
                    .we_L(cPts.we_L),
-                   .clock(clock));
+                   .clock(clock),
+						 .fromSwitch(SW[15:0]),
+						 .toLED(LEDR[15:0]));
 
 //output display on the board for synthesis
   logic [15:0] disp1, disp0;

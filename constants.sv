@@ -24,24 +24,26 @@
 `ifndef sv_CONSTANTS
 `define sv_CONSTANTS
 
-typedef enum logic[3:0]{ // ALU operation select
-   F_A           = 4'b0000,
-   F_A_PLUS_1    = 4'b0001,
-   F_A_PLUS_B    = 4'b0010,
-   F_A_PLUS_B_1  = 4'b0011,
-   F_A_MINUS_B_1 = 4'b0100,
-   F_A_MINUS_B   = 4'b0101,
-   F_A_MINUS_1   = 4'b0110,
-   F_B           = 4'b0111,
-   F_A_NOT       = 4'b1000,
-   F_A_AND_B     = 4'b1001,
-   F_A_OR_B      = 4'b1010,
-   F_A_XOR_B     = 4'b1011,
-   F_A_SHL       = 4'b1100,
-   F_A_ROL       = 4'b1101,
-   F_A_LSHR      = 4'b1110,
-   F_A_ASHR      = 4'b1111,
-   F_UNDEF       = 4'bxxxx
+typedef enum logic[4:0]{ // ALU operation select
+   F_A           = 5'b00000,
+   F_A_PLUS_1    = 5'b00001,
+   F_A_PLUS_B    = 5'b00010,
+   F_A_PLUS_B_1  = 5'b00011,
+   F_A_MINUS_B_1 = 5'b00100,
+   F_A_MINUS_B   = 5'b00101,
+   F_A_MINUS_1   = 5'b00110,
+   F_B           = 5'b00111,
+   F_A_NOT       = 5'b01000,
+   F_A_AND_B     = 5'b01001,
+   F_A_OR_B      = 5'b01010,
+   F_A_XOR_B     = 5'b01011,
+   F_A_SHL       = 5'b01100,
+   F_A_ROL       = 5'b01101,
+   F_A_LSHR      = 5'b01110,
+   F_A_ASHR      = 5'b01111,
+	F_A_POSC		  = 5'b10000,
+	F_A_NEGC		  = 5'b10001,
+   F_UNDEF       = 5'bxxxxx
    } alu_op_t; // ALU operation select
 
 typedef enum logic [1:0]{ // ALU input mux select
@@ -190,7 +192,14 @@ typedef enum logic [9:0] {
    ADDSP1 = 10'b00_0011_1101,
    ADDSP2 = 10'b00_0011_1110,
 
-   UNDEF  = 10'bxx_xxxx_xxxx
+   UNDEF  = 10'bxx_xxxx_xxxx,
+
+	//Our new opcodes
+	SADD   = 10'b00_1111_0100,
+	SADD1  = 10'b10_1111_0101,
+	SADD2  = 10'b10_1111_0110,
+	SADD3  = 10'b10_1111_0111
+
 
 
 } opcode_t;

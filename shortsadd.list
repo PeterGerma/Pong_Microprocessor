@@ -1,0 +1,12 @@
+addr data   label     opcode  operands
+---- ----  --------   ------  --------
+0000 0C00             LDI     R0      
+0001 DEAD                     $DEAD   
+0002 0409  YIKES      LDA     R1      
+0003 1001                     $1001   
+0004 3D01             .DW     $3D01   
+0005 0600             STA     $1000   
+0006 1000                     R0      
+0007 2800             BRA             
+0008 0002                     YIKES   
+0009 3000             STOP            

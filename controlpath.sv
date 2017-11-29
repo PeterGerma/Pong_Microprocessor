@@ -448,24 +448,37 @@ module controlpath (
            nextState = NEG1;
         end
         NEG1: begin
-           out = {F_A_PLUS_1, MUX_REG, 2'bxx, DEST_REG, NO_LOAD, NO_RD, NO_WR};
+			  out = {F_A_PLUS_1, MUX_REG, 2'bxx, DEST_REG, NO_LOAD, NO_RD, NO_WR};
            nextState = FETCH;
         end
-				/*
-				SADD: begin
-					 out = {
 
-				end
-				//If first input is positive
-				SADD1: begin
+		  //OUR CODE
+		  //// {ALU fn, AmuxSel, BmuxSel, DestDecode, CCLoad, RE, WE}
+		  SADD: begin
+			  out = {F_A_PLUS_B, MUX_REG, MUX_REG, DEST_REG, LOAD_CC, NO_RD, NO_WR};
+			  nextState = SADD1;
+		  end
+		  //Branching based on overflow and sign
+		  SADD1: begin
+			  out = {8'bxx, DEST_NONE, NO_LOAD, NO_RD, NO_WR};
+			  if (CCin[0] && ~CCin[1])
+				  nextState = SADD2;
+			  else if(CCin[0] && CCin[1])
+				  nextState = SADD3;
+			  else
+			     nextState = FETCH;
+		  end
+		  //If the overflow is positive
+		  SADD2: begin
+			  out = {F_A_POSC, MUX_REG, 2'bxx, DEST_REG, NO_LOAD, NO_RD, NO_WR};
+			  nextState = FETCH;
+		  end
+		  //If the overflow is negative
+		  SADD3: begin
+			  out = {F_A_NEGC, MUX_REG, 2'bxx, DEST_REG, NO_LOAD, NO_RD, NO_WR};
+			  nextState = FETCH;
+		  end
 
-					 nextState = FETCH;
-				end
-				//If first input is negative
-				SADD2: begin
-
-					 nextState = FETCH;
-				end */
         default: begin
            out = 14'bx;
            nextState = FETCH;

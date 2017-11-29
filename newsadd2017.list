@@ -1,0 +1,51 @@
+addr data   label     opcode  operands
+---- ----  --------   ------  --------
+1000 0C00             LDI     R0      
+1001 000D                     $000D   
+1002 0C1B             LDI     R3      
+1003 0000                     $0000   
+1004 0C09             LDI     R1      
+1005 2000                     DATA    
+1006 0C24             LDI     R4      
+1007 200E                     SUM     
+1008 0811  LOOP       LDR     R2 R1   
+1009 3D1A             .DW     $3D1A   
+100A 0A23  CKEND      STR     R4 R3   
+100B 1409             INCR    R1      
+100C 1424             INCR    R4      
+100D 1600             DECR    R0      
+100E 2C00             BRN             
+100F 1012                     DONE    
+1010 2800             BRA             
+1011 1008                     LOOP    
+1012 3000  DONE       STOP            
+2000 DEAD  DATA       .DW     $DEAD   
+2001 BEEF             .DW     $BEEF   
+2002 DEAD             .DW     $DEAD   
+2003 104E             .DW     $104E   
+2004 0ECE             .DW     $0ECE   
+2005 1BFD             .DW     $1BFD   
+2006 44E5             .DW     $44E5   
+2007 0001             .DW     $0001   
+2008 0001             .DW     $0001   
+2009 2400             .DW     $2400   
+200A 5BF0             .DW     $5BF0   
+200B 000F             .DW     $000F   
+200C FFF2             .DW     $FFF2   
+200D 0010             .DW     $0010   
+200E 00FF  SUM        .DW     $FF     
+200F 00FF             .DW     $FF     
+2010 00FF             .DW     $FF     
+2011 00FF             .DW     $FF     
+2012 00FF             .DW     $FF     
+2013 00FF             .DW     $FF     
+2014 00FF             .DW     $FF     
+2015 00FF             .DW     $FF     
+2016 00FF             .DW     $FF     
+2017 00FF             .DW     $FF     
+2018 00FF             .DW     $FF     
+2019 00FF             .DW     $FF     
+201A 00FF             .DW     $FF     
+201B 00FF             .DW     $FF     
+201C 00FF             .DW     $FF     
+201D 0000             .DW     $00     
